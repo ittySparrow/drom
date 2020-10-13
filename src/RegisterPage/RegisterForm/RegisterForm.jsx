@@ -19,7 +19,6 @@ export default ({
   handleDateChange,
   setValue,
   getValues,
-  control,
 }) => {
   return (
     <form
@@ -51,7 +50,11 @@ export default ({
         getValues={getValues}
         setValue={setValue}
       />
-      <PhoneInput register={register} error={errors.tel} control={control} />
+      <PhoneInput
+        register={register}
+        error={errors.tel}
+        getValues={getValues}
+      />
       <NameInput register={register} error={errors.name} />
       <button className="submit-button" disabled={!isValid}>
         Записаться

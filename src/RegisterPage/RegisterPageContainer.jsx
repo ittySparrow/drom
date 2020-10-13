@@ -5,7 +5,7 @@ import { requestDates } from "../_reducers/registerPage";
 import { addOrder } from "../_reducers/ordersPage";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import RegisterFormClear from "./RegisterForm/RegisterForm";
+import RegisterForm from "./RegisterForm/RegisterForm";
 import "./RegisterPage.css";
 
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
@@ -27,7 +27,7 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
 
   const { isValid, isSubmitting, isSubmitSuccessful } = formState;
 
-  watch(["city", "time", "date"]);
+  watch(["city", "time", "date", "tel"]);
 
   useEffect(() => {
     const city = getValues("city");
@@ -41,16 +41,21 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     setValue("time", null);
   }, [getValues("date")]);
 
-  const onSubmit = async (data) => {
-    await setTimeout(() => addOrder(data), 5000);
-    alert("Вы успешно зарегистрированы.");
-    reset();
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      alert("Вы успешно зарегистрированы.");
+      reset();
+    }
+  }, [isSubmitSuccessful]);
+
+  const onSubmit = (data) => {
+    addOrder(data);
   };
 
   return (
     <div className="register-page-wrapper">
-      <Header />
-      <RegisterFormClear
+      <Header isSubmitting={isSubmitting} />
+      <RegisterForm
         control={control}
         register={register}
         onSubmit={onSubmit}
@@ -64,7 +69,7 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
         clearErrors={clearErrors}
         setValue={setValue}
       />
-      <Footer />
+      <Footer isSubmitting={isSubmitting} />
     </div>
   );
 };

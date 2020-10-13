@@ -5267,6 +5267,11 @@ ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
+imask@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/imask/-/imask-6.0.5.tgz#313250391bd957204cb4262426b54260929051ca"
+  integrity sha512-V9RVdbQsMxXLHK97FYR3wuHeyAc26q/0WeuRONRoqP4IFTKb472+akrFW/VPSBFYdB1PTI6impx1YgI/EDpWcQ==
+
 immer@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
@@ -8670,6 +8675,14 @@ react-hook-form@^6.9.2:
   version "6.9.2"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.9.2.tgz#9512cd424e62235fda13c8fc1821f88c352e3d23"
   integrity sha512-vCPEbHVCRvsoqrQARgQ7a3VrXzqbFOO53gHFRdQzLzHMT9kxum3wfcSi8A1b49KPRsomvsqexH4tBUJMneEu+Q==
+
+react-imask@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/react-imask/-/react-imask-6.0.5.tgz#027e7d624b750442bad678075e707d5b8c93fa3e"
+  integrity sha512-BHyUwXjjuHgnZ2Lp+3oGRqZit+JoC3Xsp/H2vCZeGgdW7oevjjCL5PGSEpksRfkEjkrsg4KgmbZbBUdny9eY4Q==
+  dependencies:
+    imask "^6.0.5"
+    prop-types "^15.7.2"
 
 react-input-mask@^2.0.4:
   version "2.0.4"

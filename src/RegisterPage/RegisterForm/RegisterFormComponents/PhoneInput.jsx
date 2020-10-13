@@ -1,16 +1,16 @@
 import React from "react";
-import ReactInputMask from "react-input-mask";
+import { IMaskInput } from "react-imask";
 import { errorMessagePhoneInput } from "../../../_errors/errorMessages";
-import validatePhone from "../../../_validator/validatePhone";
+import { validatePhone } from "../../../_validator/validatePhone";
 import cn from "classnames/dedupe";
-import { Controller } from "react-hook-form";
 
-export default ({ register, error, control }) => {
+export default ({ register, error, getValues }) => {
   return (
     <div className="form-group tel">
-      <ReactInputMask
-        ref={register({ required: true, validate: validatePhone })}
-        mask="+7 (999) 999-99-99"
+      <IMaskInput
+        mask={"{+7 }{(}000{) }000{-}00{-}00"}
+        inputRef={register({ required: true, validate: validatePhone })}
+        unmask={false}
         name="tel"
         className={cn("form-group-input", { error: error })}
         placeholder="+7 (___) ___-__-__"

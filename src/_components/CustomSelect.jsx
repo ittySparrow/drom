@@ -31,6 +31,7 @@ export default function ({
             onBlur={() => setIsOpen(false)}
             placeholder={placeholder}
             readOnly="readonly"
+            disabled={name === "time" ? !getValues("date") : false}
           />
           {isOpen && (
             <div className="dropdown">

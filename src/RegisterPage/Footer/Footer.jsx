@@ -1,8 +1,9 @@
 import React from "react";
+import cn from "classnames/dedupe";
 
-export default () => {
+export default ({ isSubmitting }) => {
   return (
-    <footer className="footer">
+    <footer className={cn("footer", { isSubmitting: isSubmitting })}>
       Нажимая "Записаться", я выражаю своё согласие с обработкой моих
       персональных данных в соответствии с принятой{" "}
       <a href="#">политикой конфиденциальности</a> и принимаю{" "}
