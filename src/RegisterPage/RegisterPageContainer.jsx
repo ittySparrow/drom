@@ -1,33 +1,25 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { requestDates } from "../_reducers/registerPage";
 import { addOrder } from "../_reducers/ordersPage";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import RegisterForm from "./RegisterForm/RegisterForm";
+
 import "./RegisterPage.css";
 
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    formState,
-    getValues,
-    setValue,
-    watch,
-    reset,
-    clearErrors,
-    control,
-  } = useForm({
+  const methods = useForm({
     mode: "all",
     defaultValues: { city: "Владивосток" },
   });
 
-  const { isValid, isSubmitting, isSubmitSuccessful } = formState;
+  const { formState, watch, getValues, setValue, clearErrors, reset } = methods;
 
-  watch(["city", "time", "date", "tel"]);
+  const { isSubmitting, isSubmitSuccessful } = formState;
+
+  watch(["city", "time", "date"]);
 
   useEffect(() => {
     const city = getValues("city");
@@ -55,20 +47,14 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   return (
     <div className="register-page-wrapper">
       <Header isSubmitting={isSubmitting} />
-      <RegisterForm
-        control={control}
-        register={register}
-        onSubmit={onSubmit}
-        handleSubmit={handleSubmit}
-        getValues={getValues}
-        cities={cities}
-        dates={dates}
-        errors={errors}
-        isValid={isValid}
-        isSubmitting={isSubmitting}
-        clearErrors={clearErrors}
-        setValue={setValue}
-      />
+      <FormProvider {...methods}>
+        <RegisterForm
+          isSubmitting={isSubmitting}
+          onSubmit={onSubmit}
+          cities={cities}
+          dates={dates}
+        />
+      </FormProvider>
       <Footer isSubmitting={isSubmitting} />
     </div>
   );

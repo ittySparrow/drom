@@ -14,6 +14,7 @@
 }
 
 .form {
+  box-sizing: border-box;
   display: grid;
   grid-gap: 1.5em;
   grid-template-areas:
@@ -25,8 +26,8 @@
     "button button";
 }
 
-.error {
-  grid-area: error;
+.form-group {
+  box-sizing: border-box;
 }
 
 .city {

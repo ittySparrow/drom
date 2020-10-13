@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import cn from "classnames/dedupe";
+import { useFormContext } from "react-hook-form";
 
-export default function ({
-  options,
-  register,
-  name,
-  placeholder,
-  error = false,
-  errorMessageInput,
-  getValues,
-  setValue,
-}) {
+export default function ({ options, name, placeholder, errorMessageInput }) {
+  const { setValue, getValues, register, errors } = useFormContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const onOptionClicked = (value) => () => {
@@ -23,7 +17,9 @@ export default function ({
       <div className={cn("form-group", name)}>
         <div className="dropdown-container">
           <input
-            className={cn("dropdown-header form-group-input", { error: error })}
+            className={cn("dropdown-header form-group-input", {
+              error: errors[name],
+            })}
             name={name}
             ref={register({ required: true })}
             onClick={toggle}
@@ -50,7 +46,7 @@ export default function ({
             </div>
           )}
         </div>
-        <div className="field-error">{error && errorMessageInput}</div>
+        <div className="field-error">{errors[name] && errorMessageInput}</div>
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import { errorMessageDateInput } from "../../../_errors/errorMessages";
 import formatDate from "../../../_helpers/format/formatDate";
 import CustomSelect from "../../../_components/CustomSelect";
 
-export default ({ register, error, dates, getValues, setValue }) => {
+export default ({ dates }) => {
   const options = () => {
     return _.keys(dates).map((date) => ({
       key: date,
@@ -14,13 +14,9 @@ export default ({ register, error, dates, getValues, setValue }) => {
 
   return (
     <CustomSelect
-      register={register}
-      getValues={getValues}
-      setValue={setValue}
       options={options()}
       name="date"
       placeholder={"Дата"}
-      error={error}
       errorMessageInput={errorMessageDateInput}
     />
   );

@@ -1,5 +1,11 @@
+.app-wrapper {
+  margin: 0 auto;
+  padding: 0;
+}
+
 .app-wrapper-content {
   margin: auto;
-  padding: 0 30px;
+  padding: 0;
   max-width: 500px;
+  min-width: 400px;
 }
