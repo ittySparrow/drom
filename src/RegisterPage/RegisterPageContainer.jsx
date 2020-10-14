@@ -30,7 +30,10 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   }, [cities, getValues("city")]);
 
   useEffect(() => {
-    setValue("time", null);
+    const values = getValues();
+    if (getValues("date")) {
+      setValue("time", null);
+    }
   }, [getValues("date")]);
 
   useEffect(() => {
