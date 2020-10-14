@@ -7,8 +7,6 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import RegisterForm from "./RegisterForm/RegisterForm";
 
-import "./RegisterPage.css";
-
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   const methods = useForm({
     mode: "all",
