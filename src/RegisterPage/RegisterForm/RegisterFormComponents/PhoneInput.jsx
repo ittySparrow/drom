@@ -1,22 +1,31 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-import { errorMessagePhoneInput } from "../../../_errors/errorMessages";
+import { errorMessagePhoneInput } from "../../../_validator/errorMessages";
 import { validatePhone } from "../../../_validator/validatePhone";
 import cn from "classnames/dedupe";
 
 export default () => {
-  const { register, errors } = useFormContext();
+  const { errors, control, getValues } = useFormContext();
 
   return (
     <div className="form-group tel">
-      <IMaskInput
-        mask={"{+7 }{(}000{) }000{-}00{-}00"}
-        inputRef={register({ required: true, validate: validatePhone })}
-        unmask={false}
+      <Controller
+        render={({ onChange, onBlur }) => (
+          <IMaskInput
+            mask={"{+7 }{(}000{) }000{-}00{-}00"}
+            unmask={false}
+            onBlur={onBlur}
+            onAccept={onChange}
+            className={cn("form-group-input", { error: errors.tel })}
+            placeholder="+7 (___) ___-__-__"
+            value={getValues("tel")}
+          />
+        )}
+        control={control}
+        rules={{ required: true, validate: validatePhone }}
         name="tel"
-        className={cn("form-group-input", { error: errors.tel })}
-        placeholder="+7 (___) ___-__-__"
+        defaultValue=""
       />
       <div className="field-error">{errors.tel && errorMessagePhoneInput}</div>
     </div>

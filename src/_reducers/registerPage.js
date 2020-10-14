@@ -1,5 +1,5 @@
 import api from "../_api/api";
-import getAvailableDates from "../_helpers/getAvailableDates";
+import getAvailableDates from "../_utils/getAvailableDates";
 
 const REQUEST_CITIES_SUCCESS = "api/REQUEST_CITIES_SUCCESS";
 const REQUEST_DATES_SUCCESS = "api/REQUEST_DATES_SUCCESS";

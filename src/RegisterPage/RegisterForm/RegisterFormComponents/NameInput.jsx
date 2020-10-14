@@ -1,5 +1,5 @@
 import React from "react";
-import { errorMessageNameInput } from "../../../_errors/errorMessages";
+import { errorMessageNameInput } from "../../../_validator/errorMessages";
 import cn from "classnames/dedupe";
 import { useFormContext } from "react-hook-form";
 

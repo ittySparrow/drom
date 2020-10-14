@@ -17,3 +17,13 @@ th {
   background-color: #941d1d;
   color: white;
 }
+
+td {
+  background-color: #e8e8e8;
+}
+
+.delete-order:hover {
+  background-color: #941d1d;
+  color: white;
+  cursor: pointer;
+}

@@ -62,4 +62,8 @@ export default {
   //   },
   //   "message": ""
   // }
+
+  requestOrders() {
+    return JSON.parse(localStorage.getItem("orders")) || [];
+  },
 };

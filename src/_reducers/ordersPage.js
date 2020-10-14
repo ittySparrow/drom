@@ -1,3 +1,6 @@
+import _ from "lodash";
+import api from "../_api/api";
+
 const REQUEST_ORDERS_SUCCESS = "ordersPage/REQUEST_ORDERS_SUCCESS";
 
 const requestOrdersSuccess = (orders) => ({
@@ -6,14 +9,24 @@ const requestOrdersSuccess = (orders) => ({
 });
 
 export const requestOrders = () => async (dispatch) => {
-  const orders = JSON.parse(localStorage.getItem("orders"));
+  const orders = api.requestOrders();
   dispatch(requestOrdersSuccess(orders));
 };
 
 export const addOrder = (order) => async (dispatch) => {
-  await setTimeout(() => {}, 3000);
-  const data = JSON.parse(localStorage.getItem("orders")) || [];
-  localStorage.setItem("orders", JSON.stringify([...data, order]));
+  const orders = api.requestOrders();
+  localStorage.setItem(
+    "orders",
+    JSON.stringify([...orders, { ...order, id: _.uniqueId("order_") }])
+  );
+  dispatch(requestOrders());
+};
+
+export const deleteOrder = (orderId) => async (dispatch) => {
+  const orders = api.requestOrders();
+  const filtered = orders.filter(({ id }) => id !== orderId);
+  localStorage.clear();
+  localStorage.setItem("orders", JSON.stringify([...filtered]));
   dispatch(requestOrders());
 };
 

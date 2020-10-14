@@ -1,14 +1,19 @@
 import React from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { requestOrders } from "../_reducers/ordersPage";
+import { requestOrders, deleteOrder } from "../_reducers/ordersPage";
 import OrdersPage from "./OrdersPage";
 
-const OrdersPageContainer = ({ orders, requestOrders }) => {
+const OrdersPageContainer = ({ orders, requestOrders, deleteOrder }) => {
   useEffect(() => {
     requestOrders();
   }, []);
-  return <OrdersPage orders={orders} />;
+
+  const handleClick = (id) => {
+    deleteOrder(id);
+  };
+
+  return <OrdersPage orders={orders} handleClick={handleClick} />;
 };
 
 const mapStateToProps = ({ ordersPage }) => {
@@ -19,6 +24,7 @@ const mapStateToProps = ({ ordersPage }) => {
 
 const mapDispatchToProps = {
   requestOrders,
+  deleteOrder,
 };
 
 export default connect(

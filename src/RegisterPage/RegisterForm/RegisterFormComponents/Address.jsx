@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import formatPhoneNumber from "../../../_helpers/format/formatPhoneNumber";
-import formatPrice from "../../../_helpers/format/formatPrice";
+import { formatPhoneNumber, formatPrice } from "../../../_utils/format";
 
 const Phones = ({ phones }) => {
   const result = [];

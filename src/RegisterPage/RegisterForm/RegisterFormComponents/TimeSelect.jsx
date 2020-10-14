@@ -1,10 +1,9 @@
 import React from "react";
 import _ from "lodash";
 import { useFormContext } from "react-hook-form";
-import { errorMessageTimeInput } from "../../../_errors/errorMessages";
-import formatDate from "../../../_helpers/format/formatDate";
-import formatTime from "../../../_helpers/format/formatTime";
-import CustomSelect from "../../../_components/CustomSelect";
+import { errorMessageTimeInput } from "../../../_validator/errorMessages";
+import CustomSelect from "./CustomSelect";
+import { formatDate, formatTime } from "../../../_utils/format";
 
 export default ({ dates }) => {
   const { getValues } = useFormContext();

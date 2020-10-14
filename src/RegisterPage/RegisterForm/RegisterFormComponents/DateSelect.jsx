@@ -1,8 +1,8 @@
 import React from "react";
 import _ from "lodash";
-import { errorMessageDateInput } from "../../../_errors/errorMessages";
-import formatDate from "../../../_helpers/format/formatDate";
-import CustomSelect from "../../../_components/CustomSelect";
+import { errorMessageDateInput } from "../../../_validator/errorMessages";
+import CustomSelect from "./CustomSelect";
+import { formatDate } from "../../../_utils/format";
 
 export default ({ dates }) => {
   const options = () => {
