@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import cn from "classnames/dedupe";
 import { useFormContext } from "react-hook-form";
 
-export default function ({ options, name, placeholder, errorMessageInput }) {
+export default function ({
+  options,
+  name,
+  placeholder,
+  errorMessageInput,
+  handleClickOnDisabledEl,
+  isDisabled,
+}) {
   const { setValue, getValues, register, errors } = useFormContext();
 
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   const onOptionClicked = (value) => () => {
     setValue(name, value);
     setIsOpen(false);
@@ -15,7 +25,7 @@ export default function ({ options, name, placeholder, errorMessageInput }) {
   return (
     <>
       <div className={cn("form-group", name)}>
-        <div className="dropdown-container">
+        <div className="dropdown-container" onClick={handleClickOnDisabledEl}>
           <input
             className={cn("dropdown-header form-group-input", {
               error: errors[name],
@@ -27,7 +37,7 @@ export default function ({ options, name, placeholder, errorMessageInput }) {
             onBlur={() => setIsOpen(false)}
             placeholder={placeholder}
             readOnly="readonly"
-            disabled={name === "time" ? !getValues("date") : false}
+            disabled={isDisabled}
           />
           {isOpen && (
             <div className="dropdown">

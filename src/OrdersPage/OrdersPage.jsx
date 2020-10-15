@@ -38,7 +38,7 @@ export default ({ orders, handleClick }) => {
                   onClick={() => handleClick(id)}
                   key={_.uniqueId()}
                 >
-                  X
+                  x
                 </td>
               </tr>
             ))}

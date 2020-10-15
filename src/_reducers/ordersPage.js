@@ -1,5 +1,5 @@
-import _ from "lodash";
 import api from "../_api/api";
+import generateUniqueID from "../_utils/generateUniqueID";
 
 const REQUEST_ORDERS_SUCCESS = "ordersPage/REQUEST_ORDERS_SUCCESS";
 
@@ -17,8 +17,9 @@ export const addOrder = (order) => async (dispatch) => {
   const orders = api.requestOrders();
   localStorage.setItem(
     "orders",
-    JSON.stringify([...orders, { ...order, id: _.uniqueId("order_") }])
+    JSON.stringify([...orders, { ...order, id: generateUniqueID("order_") }])
   );
+
   dispatch(requestOrders());
 };
 

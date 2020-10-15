@@ -6,6 +6,7 @@ import { addOrder } from "../_reducers/ordersPage";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import "./RegisterPage.css";
 
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   const methods = useForm({
@@ -13,50 +14,45 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     defaultValues: { city: "Владивосток" },
   });
 
-  const { formState, watch, getValues, setValue, clearErrors, reset } = methods;
+  const { watch, getValues, setValue, reset, trigger } = methods;
 
-  const { isSubmitting, isSubmitSuccessful } = formState;
+  watch(["city", "date"]);
 
-  watch(["city", "time", "date"]);
-
-  useEffect(() => {
-    const city = getValues("city");
-    requestDates(city, cities);
-    setValue("date", null);
-    setValue("time", null);
-    clearErrors();
-  }, [cities, getValues("city")]);
-
-  useEffect(() => {
-    const values = getValues();
+  const updateCity = () => {
+    requestDates(getValues("city"), cities);
     if (getValues("date")) {
+      setValue("date", null);
       setValue("time", null);
+      trigger(["date", "time"]);
+      //Я не нашла другого способа сбросить значения этих полей и их валидацию.
+      // Метод reset уводит в бесконечный цикл, если использовать его внутри useEffect
     }
-  }, [getValues("date")]);
+  };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      alert("Вы успешно зарегистрированы.");
-      reset();
+  const updateDate = () => {
+    if (getValues("date") && getValues("time")) {
+      setValue("time", null);
+      trigger(["time"]);
     }
-  }, [isSubmitSuccessful]);
+  };
+
+  useEffect(updateCity, [getValues("city")]);
+
+  useEffect(updateDate, [getValues("date")]);
 
   const onSubmit = (data) => {
     addOrder(data);
+    alert("Вы успешно зарегистрированы.");
+    reset();
   };
 
   return (
     <div className="register-page-wrapper">
-      <Header isSubmitting={isSubmitting} />
       <FormProvider {...methods}>
-        <RegisterForm
-          isSubmitting={isSubmitting}
-          onSubmit={onSubmit}
-          cities={cities}
-          dates={dates}
-        />
+        <Header />
+        <RegisterForm onSubmit={onSubmit} cities={cities} dates={dates} />
+        <Footer />
       </FormProvider>
-      <Footer isSubmitting={isSubmitting} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import DateSelect from "./RegisterFormComponents/DateSelect";
 import TimeSelect from "./RegisterFormComponents/TimeSelect";
 
 export default ({ onSubmit, cities, dates }) => {
-  const { handleSubmit, formState } = useFormContext();
+  const { handleSubmit, getValues, formState } = useFormContext();
   return (
     <form
       className={cn("form", { isSubmitting: formState.isSubmitting })}
@@ -18,7 +18,7 @@ export default ({ onSubmit, cities, dates }) => {
       <CitySelect cities={cities} />
       <Address cities={cities} />
       <DateSelect dates={dates} />
-      <TimeSelect dates={dates} />
+      <TimeSelect dates={dates} date={getValues("date")} />
       <PhoneInput />
       <NameInput />
       <button className="submit-button" disabled={!formState.isValid}>

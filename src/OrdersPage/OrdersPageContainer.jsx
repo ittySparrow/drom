@@ -6,8 +6,11 @@ import OrdersPage from "./OrdersPage";
 
 const OrdersPageContainer = ({ orders, requestOrders, deleteOrder }) => {
   useEffect(() => {
-    requestOrders();
-  }, []);
+    const fetchData = async () => {
+      await requestOrders();
+    };
+    fetchData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleClick = (id) => {
     deleteOrder(id);
