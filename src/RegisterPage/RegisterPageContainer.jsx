@@ -22,7 +22,7 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     defaultValues: defaultValues,
   });
 
-  const { watch, getValues, reset } = methods;
+  const { watch, getValues, reset, formState } = methods;
 
   watch(["city", "date"]);
 
@@ -30,12 +30,18 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     requestDates(getValues("city"), cities);
   };
 
+  const handleSubmittion = () => {
+    if (formState.isSubmitSuccessful) {
+      alert("Вы успешно зарегистрированы.");
+      reset(defaultValues);
+    }
+  };
+
   useEffect(handleCityChange, [getValues("city")]);
+  useEffect(handleSubmittion, [formState.isSubmitSuccessful]);
 
   const onSubmit = (data) => {
     addOrder(data);
-    alert("Вы успешно зарегистрированы.");
-    reset(defaultValues);
   };
 
   return (
