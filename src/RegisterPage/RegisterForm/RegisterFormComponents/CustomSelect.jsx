@@ -5,10 +5,10 @@ import { useFormContext } from "react-hook-form";
 export default function ({
   options,
   name,
-  placeholder,
-  errorMessageInput,
-  handleClickOnDisabledEl,
-  isDisabled,
+  placeholder = "",
+  errorMessageInput = "Unknown error",
+  handleClickOnDisabledEl = () => {},
+  isDisabled = false,
   handleChange = () => {},
 }) {
   const { setValue, getValues, register, errors } = useFormContext();

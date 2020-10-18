@@ -18,7 +18,7 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   };
 
   const methods = useForm({
-    mode: "all",
+    mode: "all", // <== form validation mode - on change + on focus lost
     defaultValues: defaultValues,
   });
 
@@ -46,11 +46,11 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
 
   return (
     <div className="register-page-wrapper">
+      <Header formState={formState} />
       <FormProvider {...methods}>
-        <Header />
         <RegisterForm onSubmit={onSubmit} cities={cities} dates={dates} />
-        <Footer />
       </FormProvider>
+      <Footer formState={formState} />
     </div>
   );
 };

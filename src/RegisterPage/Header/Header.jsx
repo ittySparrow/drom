@@ -2,11 +2,8 @@ import React from "react";
 import Logo from "../../_assets/logo.svg";
 import Preloader from "../../_assets/preloader.gif";
 import cn from "classnames/dedupe";
-import { useFormContext } from "react-hook-form";
 
-export default () => {
-  const { formState } = useFormContext();
-
+export default ({ formState }) => {
   return (
     <header className="header">
       <div className="header-logo">

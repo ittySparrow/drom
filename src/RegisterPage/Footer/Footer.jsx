@@ -1,10 +1,7 @@
 import React from "react";
 import cn from "classnames/dedupe";
-import { useFormContext } from "react-hook-form";
 
-export default () => {
-  const { formState } = useFormContext();
-
+export default ({ formState }) => {
   return (
     <footer className={cn("footer", { isSubmitting: formState.isSubmitting })}>
       Нажимая "Записаться", я выражаю своё согласие с обработкой моих
