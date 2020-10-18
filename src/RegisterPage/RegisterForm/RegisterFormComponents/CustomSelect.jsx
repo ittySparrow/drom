@@ -9,6 +9,7 @@ export default function ({
   errorMessageInput,
   handleClickOnDisabledEl,
   isDisabled,
+  handleChange = () => {},
 }) {
   const { setValue, getValues, register, errors } = useFormContext();
 
@@ -18,8 +19,12 @@ export default function ({
   };
 
   const onOptionClicked = (value) => () => {
-    setValue(name, value);
+    const prevValue = getValues(name);
     setIsOpen(false);
+    if (value !== prevValue) {
+      setValue(name, value);
+      handleChange(name);
+    }
   };
 
   return (

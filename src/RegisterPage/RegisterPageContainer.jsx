@@ -9,41 +9,33 @@ import RegisterForm from "./RegisterForm/RegisterForm";
 import "./RegisterPage.css";
 
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
+  const defaultValues = {
+    city: "Владивосток",
+    date: "",
+    time: "",
+    tel: "",
+    name: "",
+  };
+
   const methods = useForm({
     mode: "all",
-    defaultValues: { city: "Владивосток" },
+    defaultValues: defaultValues,
   });
 
-  const { watch, getValues, setValue, reset, trigger } = methods;
+  const { watch, getValues, reset } = methods;
 
   watch(["city", "date"]);
 
-  const updateCity = () => {
+  const handleCityChange = () => {
     requestDates(getValues("city"), cities);
-    if (getValues("date")) {
-      setValue("date", null);
-      setValue("time", null);
-      trigger(["date", "time"]);
-      //Я не нашла другого способа сбросить значения этих полей и их валидацию.
-      // Метод reset уводит в бесконечный цикл, если использовать его внутри useEffect
-    }
   };
 
-  const updateDate = () => {
-    if (getValues("date") && getValues("time")) {
-      setValue("time", null);
-      trigger(["time"]);
-    }
-  };
-
-  useEffect(updateCity, [getValues("city")]);
-
-  useEffect(updateDate, [getValues("date")]);
+  useEffect(handleCityChange, [getValues("city")]);
 
   const onSubmit = (data) => {
     addOrder(data);
     alert("Вы успешно зарегистрированы.");
-    reset();
+    reset(defaultValues);
   };
 
   return (

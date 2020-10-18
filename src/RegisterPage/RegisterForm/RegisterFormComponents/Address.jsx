@@ -32,15 +32,13 @@ export default ({ cities }) => {
     return null;
   }
 
-  const { address, phones, price } = cities.filter(
-    (c) => c.name === getValues("city")
-  )[0];
+  const cityInfo = cities.filter((c) => c.name === getValues("city"))[0];
 
   return (
     <div className="address">
-      <div>{address}</div>
-      <Phones phones={phones} />
-      <div>Стоимость услуги {formatPrice(price)}</div>
+      <div>{cityInfo.address}</div>
+      <Phones phones={cityInfo.phones} />
+      <div>Стоимость услуги {formatPrice(cityInfo.price)}</div>
     </div>
   );
 };
