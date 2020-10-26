@@ -8,7 +8,7 @@ import CitySelect from "./RegisterFormComponents/CitySelect";
 import DateSelect from "./RegisterFormComponents/DateSelect";
 import TimeSelect from "./RegisterFormComponents/TimeSelect";
 
-export default ({ onSubmit, cities, dates }) => {
+export default ({ onSubmit, cities, dates, showDates }) => {
   const { handleSubmit, getValues, formState } = useFormContext();
   return (
     <form
@@ -17,7 +17,7 @@ export default ({ onSubmit, cities, dates }) => {
     >
       <CitySelect cities={cities} />
       <Address cities={cities} />
-      <DateSelect dates={dates} />
+      <DateSelect dates={dates} showDates={showDates} />
       <TimeSelect dates={dates} date={getValues("date")} />
       <PhoneInput />
       <NameInput />

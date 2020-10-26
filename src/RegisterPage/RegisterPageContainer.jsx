@@ -7,6 +7,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import RegisterForm from "./RegisterForm/RegisterForm";
 import "./RegisterPage.css";
+import { useState } from "react";
 
 const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   const defaultValues = {
@@ -16,6 +17,7 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     tel: "",
     name: "",
   };
+  const [isDatesUpdated, setIsDatesUpdated] = useState(true);
 
   const methods = useForm({
     mode: "all", // <== form validation mode - on change + on focus lost
@@ -27,7 +29,8 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
   watch(["city", "date"]);
 
   const handleCityChange = () => {
-    requestDates(getValues("city"), cities);
+    setIsDatesUpdated(false);
+    requestDates(getValues("city"), cities).then(() => setIsDatesUpdated(true));
   };
 
   const handleSubmittion = () => {
@@ -48,7 +51,12 @@ const RegisterPageContainer = ({ requestDates, addOrder, cities, dates }) => {
     <div className="register-page-wrapper">
       <Header formState={formState} />
       <FormProvider {...methods}>
-        <RegisterForm onSubmit={onSubmit} cities={cities} dates={dates} />
+        <RegisterForm
+          onSubmit={onSubmit}
+          cities={cities}
+          dates={dates}
+          showDates={isDatesUpdated}
+        />
       </FormProvider>
       <Footer formState={formState} />
     </div>

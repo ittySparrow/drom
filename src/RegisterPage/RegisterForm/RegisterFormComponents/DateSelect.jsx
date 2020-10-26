@@ -6,15 +6,17 @@ import { formatDate } from "../../../_utils/format";
 import { useFormContext } from "react-hook-form";
 import resetFields from "../../../_utils/resetFields";
 
-export default ({ dates }) => {
+export default ({ dates, showDates }) => {
   const { reset, getValues } = useFormContext();
 
   const resetTime = resetFields("date", { time: "" }, reset, getValues);
 
-  const options = _.keys(dates).map((date) => ({
-    key: date,
-    value: formatDate(date),
-  }));
+  const options = showDates
+    ? _.keys(dates).map((date) => ({
+        key: date,
+        value: formatDate(date),
+      }))
+    : [];
 
   return (
     <CustomSelect
